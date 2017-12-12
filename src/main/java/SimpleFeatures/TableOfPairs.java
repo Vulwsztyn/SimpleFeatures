@@ -5,9 +5,8 @@ import java.util.*;
 public class TableOfPairs {
     private ArrayList<SOrow> rows;
     int numberOfRows;
-    public  TableOfPairs(String queryString){
+    public  TableOfPairs(SPARQLquery stringRows){
         this.rows=new ArrayList<SOrow>();
-        SPARQLquery stringRows = new SPARQLquery(queryString);
         for (String stringRow: stringRows.getRowSrtingsList()){
             SOrow row = new SOrow(stringRow);
             rows.add(row);
