@@ -1,35 +1,19 @@
 package SimpleFeatures;
 
-import java.util.Comparator;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
 
 public class SOrow{
-    private String s;
-    private String o;
+    private Resource s;
+    private RDFNode o;
 
-
-    public SOrow(String string){
-        int i=0;
-        StringBuffer sBuffer= new StringBuffer("");
-        StringBuffer oBuffer = new StringBuffer("");
-        while(string.charAt(i)!='<') i++;
-                i++;
-        while(string.charAt(i)!='>'){
-            oBuffer.append(string.charAt(i));
-            i++;
-        }
-        while(string.charAt(i)!='<') {
-            i++;
-        }
-        i++;
-        while(string.charAt(i)!='>'){
-            sBuffer.append(string.charAt(i));
-            i++;
-        }
-        s=sBuffer.toString();
-        o=oBuffer.toString();
+    public SOrow(Resource s, RDFNode o) {
+        this.s = s;
+        this.o = o;
     }
-    public String getS(){return this.s;}
-    public String getO(){return o;}
+
+    public Resource getS(){return s;}
+    public RDFNode getO(){return o;}
     public void printO(){
         System.out.println(o);
     }

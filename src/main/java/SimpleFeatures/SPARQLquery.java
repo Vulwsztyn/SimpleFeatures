@@ -1,12 +1,13 @@
 package SimpleFeatures;
 import org.apache.jena.query.* ;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.sparql.engine.http.QueryEngineHTTP ;
 import java.util.*;
 
 public class SPARQLquery
 {
-    private  ArrayList<String> rowStrings;
-    private int numberOfRows;
+    private  ArrayList<SOrow> rows=new ArrayList<>();
 
     public SPARQLquery(String SPARQLendpoint)
     {
@@ -23,13 +24,13 @@ public class SPARQLquery
 
             // Execute.
             ResultSet rs = qexec.execSelect();
-            numberOfRows=0;
-            rowStrings = new ArrayList<>();
+            List<String> vars = rs.getResultVars();
+            assert vars.size() == 2;
             while(rs.hasNext()) {
-                String rowString=rs.nextSolution().toString();
-                rowStrings.add(rowString);
-                numberOfRows++;
-
+                QuerySolution solution=rs.nextSolution();
+                Resource s = solution.getResource(vars.get(0));
+                RDFNode o = solution.get(vars.get(1));
+                rows.add(new SOrow(s, o));
             }
 
 
@@ -40,16 +41,13 @@ public class SPARQLquery
             e.printStackTrace();
         }
     }
-    public String getRowString(int i){
-        return rowStrings.get(i);
-    }
 
-    public ArrayList<String> getRowSrtingsList() {
-        return rowStrings;
+    public List<SOrow> getRows() {
+        return rows;
     }
 
     public int getNumberOfRows(){
-        return numberOfRows;
+        return rows.size();
     }
 
 }
