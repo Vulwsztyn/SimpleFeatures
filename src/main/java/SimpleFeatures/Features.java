@@ -63,4 +63,28 @@ public class Features {
         if(symmetric) System.out.println("symmetric, ");
         if(asymmetric) System.out.println("asymmetric, ");
     }
+
+    public boolean isFunctional() {
+        return functional;
+    }
+
+    public boolean isInverseFunctional() {
+        return inverseFunctional;
+    }
+
+    public boolean isReflexive() {
+        return reflexive;
+    }
+
+    public boolean isIrreflexive() {
+        return irreflexive;
+    }
+
+    public boolean isSymmetric() {
+        return symmetric;
+    }
+
+    public boolean isAsymmetric() {
+        return asymmetric;
+    }
 }
